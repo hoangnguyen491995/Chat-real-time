@@ -1,0 +1,270 @@
+
+
+
+
+<div class="container-xl">
+	<div class="table-responsive">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2 style="color: #0d6efd;">Manage <b>User</b></h2>
+					</div>
+					<div class="col-sm-6">
+						<a style="background-color: #0d6efd;" href="#addEmployeeModal" class="btn btn-success"
+							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span (click)="HanleAddUser()" >Add New User</span></a>
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Date of birth</th>
+						<!-- <th>Phone</th> -->
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let user of users">
+						<td>{{ user.id }}</td>
+						<td style="min-width: 200px;">{{ user.username }}</td>
+						<td>{{ user.email }}</td>
+						<td>{{ user.birthday }}</td>
+						<!-- <td>{{ user.phone }}</td> -->
+						<td>
+							<a (click)="showDetail(user)" href="#editEmployeeModal" class="edit" data-toggle="modal"><i
+									class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+							<a (click)="showDetail(user)" href="#deleteEmployeeModal" class="delete"
+								data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
+									title="Delete">&#xE872;</i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div id="addEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form (ngSubmit)="createUser()" #loginForm="ngForm" [formGroup]="reactiveForm">
+				<div class="modal-header">
+					<h4 class="modal-title">Add User</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input (focus)="onFocusUsername()" (blur)="onBlurUsername()" formControlName="username"
+							[class.is-invalid]="username.invalid && (username.dirty || username.touched) && !isFieldFocusedUsername"
+							type="text" class="form-control" [(ngModel)]="user.username" placeholder="User Name">
+						<div *ngIf="username.invalid && (username.dirty || username.touched)" class="invalid-feedback">
+							<div *ngIf="username.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="username.errors?.['minlength']">
+								This field must have at most 10 characters.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input (focus)="onFocusEmail()" (blur)="onBlurEmail()" formControlName="email"
+							[class.is-invalid]="email.invalid && (email.dirty || email.touched) && !isFieldFocusedEmail"
+							type="email" class="form-control" required [(ngModel)]="user.email" placeholder="Email">
+						<div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback">
+							<div *ngIf="email.errors?.['required'] ">
+								This field is required.
+							</div>
+							<div *ngIf="email.errors?.['minlength']">
+								This field must have at least 1 character.
+							</div>
+							<div *ngIf="email.errors?.['maxlength']">
+								This field must have at most 250 characters.
+							</div>
+							<div
+								*ngIf="!email.errors?.['required'] && !email.errors?.['minlength'] && !email.errors?.['maxlength'] && email.errors?.['emailValidator']">
+								Invalid email format.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input (focus)="onFocusBirthday()" (blur)="onBlurBirthday()" formControlName="birthday"
+							[class.is-invalid]="birthday.invalid && (birthday.dirty || birthday.touched) && !isFieldFocusedBirthday"
+							class="form-control" required [(ngModel)]="user.birthday"
+							placeholder="Date of birth(VD: 2000-12-12)">
+						<div *ngIf="birthday.invalid && (birthday.dirty || birthday.touched)" class="invalid-feedback">
+							<div *ngIf="birthday.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="birthday.errors?.invalidDate && !birthday.errors?.['required'] ">
+								Invalid date format. Please use the format 'yyyy-mm-dd'.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input (focus)="onFocusPassword()" (blur)="onBlurPassword()" type="password"
+							class="form-control" required [(ngModel)]="user.password" placeholder="password"
+							[class.is-invalid]="password.invalid && (password.dirty || password.touched) && !isFieldFocusedPassword"
+							formControlName="password">
+						<div *ngIf="password.invalid && (password.dirty || password.touched) && !isFieldFocusedPassword"
+							class="invalid-feedback">
+							<div *ngIf="password.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="password.errors?.['minlength']">
+								This field must have at most 10 characters.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input (focus)="onFocusPassword2()" (blur)="onBlurPassword2()" formControlName="password2"
+							[class.is-invalid]="password2.invalid && (password2.dirty || password2.touched) && !isFieldFocusedPassword2"
+							type="password" class="form-control" required [(ngModel)]="user.password2"
+							placeholder="Repeat your password">
+						<div *ngIf="password2.invalid && (password2.dirty || password2.touched)"
+							class="invalid-feedback">
+							<div *ngIf="password2.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="password2.errors?.['minlength']">
+								This field must have at most 10 characters.
+							</div>
+							<div *ngIf="password2.errors?.passwordMismatch">
+								Passwords do not match.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input style="background-color: #0d6efd;" type="submit" class="btn btn-success" value="Add"
+						[attr.data-dismiss]="dismissModal ? 'modal' : null" [disabled]="reactiveForm.invalid">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="editEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form (ngSubmit)="editUser()" #loginForm="ngForm" [formGroup]="reactiveForm">
+				<div class="modal-header">
+					<h4 class="modal-title">Edit User</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input (focus)="onFocusUsername()" (blur)="onBlurUsername()" formControlName="username"
+							[class.is-invalid]="username.invalid && (password.dirty || username.touched && !isFieldFocusedUsername)"
+							type="text" class="form-control" [(ngModel)]="user.username" placeholder="User Name">
+						<div *ngIf="username.invalid && (username.dirty || username.touched)" class="invalid-feedback">
+							<div *ngIf="username.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="username.errors?.['minlength']">
+								This field must have at most 10 characters.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input (focus)="onFocusEmail()" (blur)="onBlurEmail()" formControlName="email"
+							[class.is-invalid]="email.invalid && (email.dirty || email.touched) && !isFieldFocusedEmail"
+							type="email" class="form-control" required [(ngModel)]="user.email" placeholder="Email">
+						<div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback">
+							<div *ngIf="email.errors?.['required'] ">
+								This field is required.
+							</div>
+							<div *ngIf="email.errors?.['minlength']">
+								This field must have at least 1 character.
+							</div>
+							<div *ngIf="email.errors?.['maxlength']">
+								This field must have at most 250 characters.
+							</div>
+							<div
+								*ngIf="!email.errors?.['required'] && !email.errors?.['minlength'] && !email.errors?.['maxlength'] && email.errors?.['emailValidator']">
+								Invalid email format.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input formControlName="birthday" 
+						[class.is-invalid]="birthday.invalid && (birthday.dirty || birthday.touched) && !isFieldFocusedBirthday"  (focus)="onFocusBirthday()" (blur)="onBlurBirthday()"
+							class="form-control" required [(ngModel)]="user.birthday"
+							placeholder="Date of birth(VD: 2012-12-12)">
+						<div *ngIf="birthday.invalid && (birthday.dirty || birthday.touched)" class="invalid-feedback">
+							<div *ngIf="birthday.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="birthday.errors?.invalidDate && !birthday.errors?.['required'] ">
+								Invalid date format. Please use the format 'yyyy-mm-dd'.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input (focus)="onFocusPassword()" (blur)="onBlurPassword()" type="password"
+							class="form-control" required [(ngModel)]="user.password" placeholder="password"
+							[class.is-invalid]="password.invalid && (password.dirty || password.touched) &&!isFieldFocusedPassword"
+							formControlName="password">
+						<div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+							<div *ngIf="password.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="password.errors?.['minlength']">
+								This field must have at most 10 characters.
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input (focus)="onFocusPassword2()" (blur)="onBlurPassword2()" formControlName="password2"
+							[class.is-invalid]="password2.invalid && (password2.dirty || password2.touched) && !isFieldFocusedPassword2"
+							type="password" class="form-control" required [(ngModel)]="user.password2"
+							placeholder="Repeat your password">
+
+						<div *ngIf="password2.invalid && (password2.dirty || password2.touched)"
+							class="invalid-feedback">
+							<div *ngIf="password2.errors?.['required']">
+								This field is required.
+							</div>
+							<div *ngIf="password2.errors?.['minlength']">
+								This field must have at most 10 characters.
+							</div>
+							<div *ngIf="password2.errors?.passwordMismatch">
+								Passwords do not match.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input style="background-color: #0d6efd;" type="submit" class="btn btn-info" value="Save"
+						[disabled]="reactiveForm.invalid">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="deleteEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form #loginForm="ngForm">
+				<div class="modal-header">
+					<h4 class="modal-title">Delete User</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete User?</p>
+					<p class="text-warning"><small>This action cannot be undone.</small></p>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input (click)="deleteUser()" type="submit" class="btn btn-danger" value="Delete">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

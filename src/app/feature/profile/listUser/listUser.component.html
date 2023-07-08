@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-lg-3 col-md-4 col-sm-6 mt-4" *ngFor="let user of filteredUsers">
+      <span (click)="handeCreateChat(user.id)"> Create chat</span>
+      <div class="panel panel-default userlist">
+        <div class="panel-body text-center">
+          <div class="userprofile">
+            <div class="userpic">
+              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="userpicimg">
+            </div>
+            <h3 class="username">{{ user.username }}</h3>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 mt-4" *ngFor="let user of filteredUsers">
+          <span (click)="handeCreateChat(user.id)"> Create chat</span>
+          <div class="panel panel-default userlist">
+            <mat-icon [matMenuTriggerFor]="menu">
+              <mat-icon>list</mat-icon>
+            </mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="handleInfoFriend(user.id)">Xem trang cá nhân</button>
+              <button mat-menu-item>Item 2</button>
+            </mat-menu>
+            <div class="panel-body text-center" (click)="handleInfoFriend(user.id)">
+              <div class="userprofile">
+                <div class="userpic">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="userpicimg">
+                </div>
+                <h3 class="username">{{ user.username }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

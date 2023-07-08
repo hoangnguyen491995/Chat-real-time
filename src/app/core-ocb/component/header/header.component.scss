@@ -1,0 +1,47 @@
+.admin_dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #0d6efd;
+    padding: 20px;
+    height: 100vh;
+    color: white;
+    position: relative;
+}
+
+.item_dashboard {
+    margin-top: 20px;
+}
+
+body {
+    display: flex;
+    justify-content: space-evenly;
+}
+a{
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+.logout_internal{
+    position: absolute;
+    bottom: 5px;
+    right: 30px;
+    cursor: pointer; 
+}
+.app-person{
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    cursor: pointer; 
+}
+
+.app-person:hover::before {
+    content: var(--custom-content, "Default value");
+    position: absolute;
+    top: -60px;
+    left: 0;
+    padding: 5px;
+  }
+  
+

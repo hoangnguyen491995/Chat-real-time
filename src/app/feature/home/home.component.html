@@ -1,0 +1,72 @@
+<div class="home" (click)="Hand()" >
+    <ng-container *ngIf="popoverService.isPopoverVisible$ | async">
+        <div class="popover">
+            <div class="icon-background" style="display: flex; align-items: center;">
+                <span style="margin-left: 10px; font-weight: 600;">{{ Friend}}</span>
+            </div>
+            <div class="screen">
+                <div class="conversation">
+                    <div class="messages messages--received">
+                        <div class="message messagechat" *ngFor="let message of listSendMessage">
+                            <div [ngClass]="getMessageClass(message.position)">
+                                <span class="content">
+                                    {{ message.content }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-bar" style="position: relative ">
+                    <form class="text-bar__field" id="form-message">
+                        <input (keydown.enter)="sendMessage()" class="input_message" [(ngModel)]="message" type="text"
+                            [ngModelOptions]="{standalone: true}" />
+                        <!-- <button (click)="sendMessage()" -->
+                        <button
+                            style="border-radius: 4px; padding: 2px 8px; position: absolute ; top: 12px; right: 5px ; border: none ; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); background-color: #2196F3;">send</button>
+                    </form>
+                </div>
+            </div>
+            <mat-icon (click)="onMessageClickClose()"
+                style="position: absolute; right: 5px ; top: 5px ; color : #2196F3 ">close</mat-icon>
+        </div>
+    </ng-container>
+    <!-- // listSendMessage right-->
+    <div class="container">
+        <div class="messaging">
+            <div class="inbox_msg">
+                <div class="inbox_people" style="width: 100%;">
+                    <div class="headind_srch">
+                        <div class="recent_heading">
+                            <h4>Recent</h4>
+                            <span>
+                                {{numberTest}}
+                            </span>
+                        </div>
+                        <div class="srch_bar">
+                            <div class="stylish-input-group">
+                                <input type="text" class="search-bar" placeholder="Search">
+                                <span class="input-group-addon">
+                                    <button type="button"> <i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inbox_chat" *ngFor="let user of users">
+                        <div class="chat_list" (click)="onMessageClick(user.chats[0].id , user.username )">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"
+                                        alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5 style="font-weight: 600;">{{ user.username }} <span class="chat_date">Dec
+                                            25</span></h5>
+                                    <p class="truncate">Test, which is a new approach to have all solutions
+                                        astrology under one roof.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

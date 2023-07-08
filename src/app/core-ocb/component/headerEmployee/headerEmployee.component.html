@@ -1,0 +1,96 @@
+<div class="headerEmployee" style="position: relative;" color="primary">
+  <header *ngIf="isLogin" class="header">
+    <div style="color: #2196F3; 
+    " class="navbar-brand font-weight-bold title">
+      Chat Real Time
+    </div>
+
+    <div class="item-icon">
+      <i (click)="routeHome()" class="fa fa-home"></i>
+      <i MenuCloseReason class="fa-solid fa-envelope"></i>
+      <!-- mat-button [matMenuTriggerFor]="afterMenu" -->
+      <!-- <mat-menu #afterMenu="matMenu" xPosition="after" class="popover1">
+        <app-listMessage></app-listMessage>
+      </mat-menu> -->
+      <a class="bell" matBadge={{notiNumber}} matBadgePosition="after" matBadgeColor="accent"
+        [matMenuTriggerFor]="menu">
+        <i class="fa-solid fa-bell"></i>
+      </a>
+      <mat-menu class="popover1" #menu="matMenu">
+        <div class="container">
+          <h3 class=" text-center">Notifications</h3>
+          <div class="messaging">
+            <div class="inbox_msg">
+              <div class="inbox_people" style="width: 100%;">
+                <div class="inbox_chat">
+                  <div class="chat_list">
+                    <div class="chat_people">
+                      <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                      </div>
+                      <div class="chat_ib">
+                        <h5>{{user.username}}</h5>
+                        <div *ngIf="notiBirthdayInDay; else notBirthdayDay">
+                          <h3 style="color:red">Hôm nay là sinh nhật của bạn!</h3>
+                        </div>
+                        <ng-template #notBirthdayDay>
+                          <div *ngIf="notiBirthdayInMonth">
+                            <p style="color:red">Trong tháng này bạn có sinh nhật vào ngày
+                              <span>{{user.birthday.slice(5,10)}}</span>
+                            </p>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-menu>
+      <a>
+        <i mat-button [matMenuTriggerFor]="belowMenu" class="fa-solid fa-user"></i>
+      </a>
+
+      <mat-menu #belowMenu="matMenu"   xPosition="before" yPosition="above" class="custom-menu" >
+        <div class="menu-content popoverMenu">
+          <div class="menu-content_item1" (click)="GetProfile()">
+            <i class="fa-solid fa-user menu-person "></i>
+            <span>{{user.username}}</span>
+          </div>
+          <div class="menu-content_item">
+            <a class="nav-link text-uppercase font-weight-bold" (click)="handleLogout()">
+              <i class="fa menu-person">&#xf08b;</i>
+            </a>
+            <span>Logout</span>
+          </div>
+        </div>
+      </mat-menu>
+    </div>
+  </header>
+</div>
+
+<div *ngIf="!isLogin">
+  <header class="header" style="height:80px ; background-color: #0d6efd">
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+      <div class="container"><a href="#" class="navbar-brand font-weight-bold" style="color: #ffffff;">Chat
+          Real-Time</a>
+        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto" style="min-width: 200px; display: flex; justify-content: space-around;">
+            <li class="nav-item active"><a href="/home" class="nav-link text-uppercase font-weight-bold"
+                onclick="route()"> <app-Icon></app-Icon> <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item"><a href="/about" class="nav-link text-uppercase font-weight-bold">
+                <app-message></app-message> </a></li>
+            <li class="nav-item"><a href="/login" class="nav-link text-uppercase font-weight-bold"><i
+                  style="font-size:24px" class="fa">&#xf090;</i></a> </li>
+            <div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
