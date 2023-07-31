@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-
-
 import {Store} from '@ngrx/store';
 
 import { AppState, appSlice ,selectValue } from 'src/redux/app.slice';
