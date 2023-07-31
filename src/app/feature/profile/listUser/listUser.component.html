@@ -1,3 +1,6 @@
+
+<!-- <span (click)="handleClick()">click</span>
+<span>{{todo.title}}</span> -->
 <div class="container">
   <div class="row">
     <!-- <div class="col-lg-3 col-md-4 col-sm-6 mt-4" *ngFor="let user of filteredUsers">
@@ -13,14 +16,11 @@
         </div>
       </div>
     </div> -->
-
-
-
-    
+     {{numberTest}}
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 mt-4" *ngFor="let user of filteredUsers">
-          <span (click)="handeCreateChat(user.id)"> Create chat</span>
+        <div class="col-lg-6 col-md-6 col-sm-8 mt-4" *ngFor="let user of filteredUsers">
+          <!-- <span (click)="handeCreateChat(user.id)"> Create chat</span> -->
           <div class="panel panel-default userlist">
             <mat-icon [matMenuTriggerFor]="menu">
               <mat-icon>list</mat-icon>
@@ -41,8 +41,16 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </div>
+
+<p>Data from Component A: {{ receivedData }}</p>
+<app-test></app-test>
+<div>
+  <h4>Component Con 1 </h4>
+  <ng-content></ng-content>
+</div>
+
+
+
+

@@ -18,7 +18,6 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     increaseValue: (state : AppState ) => {
-
       state.value += 1;
       console.log(state.value);
       

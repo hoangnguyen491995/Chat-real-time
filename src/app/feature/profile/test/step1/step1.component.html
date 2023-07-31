@@ -1,0 +1,58 @@
+<div class="container">
+  <form class="sign-in-form" [formGroup]="signInForm" autocomplete="off" (ngSubmit)="onSubmit()" >
+    <h2>Sign in</h2>
+    <div class="row-control">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" formControlName="username" />
+        <!-- <mat-error *ngIf="signInForm.get('username').invalid && (signInForm.get('username').dirty || signInForm.get('username').touched)">
+          <span *ngIf="signInForm.get('username').errors?.required">Username is required</span>
+          <span *ngIf="signInForm.get('username').errors?.minlength">Username must be at least 5 characters</span>
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="row-control">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback">
+          <div *ngIf="email.errors?.['required']">
+            This field is required.
+          </div>
+          <div *ngIf="email.errors?.['minlength']">
+            This field must have at least 1 character.
+          </div>
+          <div *ngIf="email.errors?.['maxlength']">
+            This field must have at most 250 characters.
+          </div>
+          <div
+            *ngIf="!email.errors?.['required'] && !email.errors?.['minlength'] && !email.errors?.['maxlength'] && email.errors?.['emailValidator']">
+            Invalid email format.
+          </div>
+        </div>
+        <!-- <mat-error *ngIf="signInForm.get('email')!.invalid && (signInForm.get('email')!.dirty || signInForm.get('email').touched)">
+          <span *ngIf="signInForm.get('email')!.errors?.required">Email is required</span>
+          <span *ngIf="signInForm.get('email')!.errors?.minlength">Email must be at least 1 character</span>
+          <span *ngIf="signInForm.get('email')!.errors?.maxlength">Email can't exceed 250 characters</span>
+          <span *ngIf="signInForm.get('email')!.errors?.emailValidator">Invalid email format</span>
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="row-control">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="Password" formControlName="password" />
+        <!-- <mat-error *ngIf="signInForm.get('password').invalid && (signInForm.get('password').dirty || signInForm.get('password').touched)">
+          <span *ngIf="signInForm.get('password').errors?.required">Password is required</span>
+          <span *ngIf="signInForm.get('password').errors?.minlength">Password must be at least 5 characters</span>
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="row-control">
+      <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
+    </div>
+    <div class="row-control row-actions">
+      <button mat-raised-button color="primary" type="submit">Sign in</button>
+    </div>
+  </form>
+</div>

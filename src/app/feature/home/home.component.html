@@ -1,4 +1,4 @@
-<div class="home" (click)="Hand()" >
+<div class="home" >
     <ng-container *ngIf="popoverService.isPopoverVisible$ | async">
         <div class="popover">
             <div class="icon-background" style="display: flex; align-items: center;">
@@ -30,7 +30,14 @@
                 style="position: absolute; right: 5px ; top: 5px ; color : #2196F3 ">close</mat-icon>
         </div>
     </ng-container>
-    <!-- // listSendMessage right-->
+    <div class="lits-category">
+      
+    </div>
+    <div class="lits-post">
+        <app-Posts></app-Posts>
+    </div>
+
+ 
     <div class="container">
         <div class="messaging">
             <div class="inbox_msg">

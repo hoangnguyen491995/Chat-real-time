@@ -2,7 +2,7 @@
   <header *ngIf="isLogin" class="header">
     <div style="color: #2196F3; 
     " class="navbar-brand font-weight-bold title">
-      Chat Real Time
+      
     </div>
 
     <div class="item-icon">
@@ -28,7 +28,7 @@
                       <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
                       </div>
                       <div class="chat_ib">
-                        <h5>{{user.username}}</h5>
+                        <!-- <h5>{{user.username}}</h5> -->
                         <div *ngIf="notiBirthdayInDay; else notBirthdayDay">
                           <h3 style="color:red">Hôm nay là sinh nhật của bạn!</h3>
                         </div>
@@ -56,7 +56,7 @@
         <div class="menu-content popoverMenu">
           <div class="menu-content_item1" (click)="GetProfile()">
             <i class="fa-solid fa-user menu-person "></i>
-            <span>{{user.username}}</span>
+            <!-- <span>{{user.username}}</span> -->
           </div>
           <div class="menu-content_item">
             <a class="nav-link text-uppercase font-weight-bold" (click)="handleLogout()">

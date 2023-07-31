@@ -16,12 +16,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ButtonComponent } from './button/button.component';
+import { InputComponent } from './input/input/input.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UploadImagesComponent } from './upload-images/upload-images.component';
+
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule, ReactiveFormsModule, FormsModule 
   ],
-  declarations: [ShareComponent],
+  declarations: [ShareComponent, InputComponent, UploadImagesComponent],
   exports: [MatButtonModule,
     MatCardModule,
     MatToolbarModule,
@@ -36,6 +40,9 @@ import { ButtonComponent } from './button/button.component';
     MatMenuModule,
     MatTableModule,
     MatDialogModule, 
+    InputComponent, 
+    UploadImagesComponent
+    
   ]
 })
 export class ShareModule { }

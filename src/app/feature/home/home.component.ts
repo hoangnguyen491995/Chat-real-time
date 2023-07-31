@@ -13,8 +13,7 @@ import { io, Socket } from 'socket.io-client';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./home.component.scss']
 })
 
 export class HomeComponent implements OnInit {
@@ -62,14 +61,6 @@ export class HomeComponent implements OnInit {
     this.loadData()
     this.receiveMessage()
     this.getListHistory()
-
-    const observable = interval(1000); // Tạo một Observable phát ra giá trị sau mỗi 1000ms (1 giây)
-
-    const subscription = observable.subscribe((value) => {
-      this.numberTest = value
-      console.log(value); // Xử lý giá trị phát ra
-      this.cdr.markForCheck();
-    });
   }
 
   /// xử lý real time

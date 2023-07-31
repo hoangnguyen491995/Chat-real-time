@@ -1,11 +1,10 @@
 .home {
     position: relative;
     height: calc(100vh - 70px);
-    width: 100%;
-    background-size: 200% 100%;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: center;
+    overflow: auto;
+    background-color: #F5F6F7;
 }
 
 .popover {
@@ -445,70 +444,18 @@ img {
     width: 400px;
     height: calc(100vh - 70px);
     background-color: #ebf0f3;
-    position: absolute;
+    position: fixed;
     right: 0;
+}
+.lits-category {
+    width: 400px;
+    height: calc(100vh - 70px);
+    background-color: #ebf0f3;
+    position: fixed;
+    left: 0;
 }
 
 
-
-
-// .message--left {
-//     /* Áp dụng kiểu dáng cho tin nhắn bên trái */
-//     background-color: #0084ff;
-//     padding: 5px 10px;
-//     border-radius: 18px;
-//     // position: absolute;
-//     // left: 15px;
-//     grid-column: 2; 
-//     margin-bottom: 10px;
-// }
-
-// .message--right {
-//     /* Áp dụng kiểu dáng cho tin nhắn bên phải */
-//     background-color: #e4e6eb;
-//     padding: 5px 10px;
-//     border-radius: 18px;
-//     // position: absolute;
-//     // right: 15px;
-//     grid-column: 1; 
-//     margin-bottom: 10px;
-// }
-
-// .messagechat{
-//     border: 2px solid red;
-// }
-
-
-
-// .messages {
-//     display: grid;
-//     grid-template-columns: 1fr 1fr; 
-//     grid-gap: 10px; 
-//  }
- 
-
-
- 
- 
-// .messages {
-//     display: grid;
-//     grid-template-columns: 1fr 1fr;
-//     grid-gap: 10px;
-// }
-
-// .message {
-//     margin-bottom: 10px;
-// }
-
-// .message--right {
-//     grid-column: 2; /* Đặt item bên phải */
-//     justify-self: end; /* Căn phải */
-// }
-
-// .message--left {
-//     grid-column: 1; /* Đặt item bên trái */
-//     justify-self: start; /* Căn trái */
-// }
 
 
 .messages {
@@ -520,7 +467,7 @@ img {
 
 .message {
     margin-bottom: 0px;
-     padding: 1px 12px!important
+    padding: 1px 12px !important
 }
 
 .message--right {
@@ -542,7 +489,14 @@ img {
     padding: 8px 10px;
     border-radius: 18px;
     margin-right: 50px;
-    width: 100%; 
+    width: 100%;
 }
 
+.lits-category{
+    width: 30%;
+}
 
+.lits-post{
+    min-width: 550px;
+    max-width: 600px;
+}

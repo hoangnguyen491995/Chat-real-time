@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { timer } from 'rxjs';
 import { emailValidator } from 'src/app/directive/EmailValidator.directive';
 import { DataService } from 'src/app/service/api/Data.service';
 import { AuthGuard } from 'src/app/service/authorization/auth.guard';
@@ -25,9 +24,11 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   };
-
+  numberTest!: number;
   reactiveForm: any;
-  constructor(private authGuard: AuthGuard, private http: HttpClient, private dataService: DataService, private router: Router, private formBuilder: FormBuilder,) { }
+  constructor(private authGuard: AuthGuard, private http: HttpClient,
+     private dataService: DataService, private router: Router,
+      private formBuilder: FormBuilder,) { }
 
   ngOnInit() {
     this.reactiveForm = new FormGroup({
@@ -41,10 +42,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
       ]),
-
     });
-
- 
   }
 
   isFieldFocused: boolean = false;
@@ -61,7 +59,7 @@ export class LoginComponent implements OnInit {
   }
   onBlurPassword() {
     console.log(this.user);
-    
+
     this.isFieldFocusedPassword = false;
   }
 
@@ -74,9 +72,6 @@ export class LoginComponent implements OnInit {
   }
 
   public validate(): void {
-    console.info('Email:', this.user.email);
-    console.info('Password:', this.user.password);
-
     if (this.reactiveForm.invalid) {
       for (const control of Object.keys(this.reactiveForm.controls)) {
         this.reactiveForm.controls[control].markAsTouched();
@@ -84,8 +79,6 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.user = this.reactiveForm.value;
-    console.info('Email:', this.user.email);
-    console.info('Password:', this.user.password);
   }
 
   login() {
@@ -94,10 +87,8 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           console.log(response);
           if (response != null) {
-            // this.authGuard.getCurrentUser()
             localStorage.setItem('currentUser', JSON.stringify(response));
             console.log(JSON.stringify(response));
-
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -108,7 +99,6 @@ export class LoginComponent implements OnInit {
               if (response.role == "ADMIN") {
                 this.router.navigate(['/admin/manage/notification']);
               } else {
-                // window.location.href = '/home';
                 this.router.navigate(['/home']);
               }
             })
@@ -124,12 +114,15 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (error) => {
+          console.log('Observable error');
           Swal.fire({
             icon: 'error',
             title: "Error 500 not found",
             showCancelButton: true,
             showConfirmButton: false
           })
+        },
+        complete: () => {
         }
       })
     } else {
@@ -141,6 +134,5 @@ export class LoginComponent implements OnInit {
         showConfirmButton: false
       })
     }
-
   }
 }

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { map, of } from 'rxjs';
 import { DataService } from 'src/app/service/api/Data.service';
 
 @Component({
   selector: 'app-adminNoti',
   templateUrl: './adminNoti.component.html',
-  styleUrls: ['./adminNoti.component.css']
+  styleUrls: ['./adminNoti.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class AdminNotiComponent implements OnInit {
 
@@ -14,18 +16,18 @@ export class AdminNotiComponent implements OnInit {
   usersNoti: any[] = [];
 
   users: any[] = [
-    {  id: 1  , name: 'Nguyễn Văn A', phone: '0123456789', email: 'nguyenvana@example.com', birthday: '24/6/1995'},
-    {  id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '6/24/1995'},
-    {  id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995'},
-    {  id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995'},
-    {  id: 2, name: 'Trần Thị Bờm', phone: '0987654321', email: 'tranthib@example.com', birthday: '6/24/1995'},
-    {  id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995'},
-    {  id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995'},
+    { id: 1, name: 'Nguyễn Văn A', phone: '0123456789', email: 'nguyenvana@example.com', birthday: '24/6/1995' },
+    { id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '6/24/1995' },
+    { id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995' },
+    { id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995' },
+    { id: 2, name: 'Trần Thị Bờm', phone: '0987654321', email: 'tranthib@example.com', birthday: '6/24/1995' },
+    { id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995' },
+    { id: 2, name: 'Trần Thị B', phone: '0987654321', email: 'tranthib@example.com', birthday: '02/02/1995' },
   ];
 
   number = this.usersNoti.length;
 
-  constructor(private dataService : DataService) { }
+  constructor(private dataService: DataService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -41,7 +43,7 @@ export class AdminNotiComponent implements OnInit {
           currentDate.getMonth() === birthday.getMonth()
         ) {
           this.usersNoti.push(user);
-          
+
           setTimeout(() => {
             const index = this.usersNoti.indexOf(user);
             if (index !== -1) {
@@ -51,11 +53,7 @@ export class AdminNotiComponent implements OnInit {
         }
       })
     ).subscribe();
-
-    
   }
-
-
 
   getListNoti() {
     // Make HTTP request to login API
@@ -63,18 +61,16 @@ export class AdminNotiComponent implements OnInit {
       next: (response) => {
         // Handle the successful response here
         console.log('lấy thông báo successful', response);
-         this.usersNoti= response
-         this.number = this.usersNoti.length;
+        this.usersNoti = response
+        this.number = this.usersNoti.length;
         // window.location.href = '/home';
-
+        this.cdr.markForCheck()
       },
       error: (error) => {
         // Handle the error response here
         console.error('delete user error', error);
-        
       }
     });
-
   }
 
 }

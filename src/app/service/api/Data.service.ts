@@ -58,7 +58,6 @@ createChat(data: any): Observable<any> {
 }
 
 
-
 deleteData(id: number): Observable<any> {
   const url = `${this.apiUrl}/admin/${id}`; 
   return this.http.delete<any>(url);
@@ -74,5 +73,12 @@ getDataNoti(): Observable<any> {
   const url = `${this.apiUrl}/admin/birthday`; 
   return this.http.get<any>(url);
 }
+
+
+getTest(): Observable<any> {
+  const url = `https://jsonplaceholder.typicode.com/comments`; 
+  return this.http.get<any>(url);
+}
+
 
 }

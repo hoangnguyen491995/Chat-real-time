@@ -15,8 +15,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     CommonModule, AboutRoutingModule 
   ],
-  declarations: [AboutComponent ],
-
- 
+  declarations: [AboutComponent]
 })
 export class AboutModule { }

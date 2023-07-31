@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { PaginationService } from './Pagination.service';
+import { SharedDataService } from './SharedData.service';
 
-describe('Service: Pagination', () => {
+describe('Service: SharedData', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PaginationService]
+      providers: [SharedDataService]
     });
   });
 
-  it('should ...', inject([PaginationService], (service: PaginationService) => {
+  it('should ...', inject([SharedDataService], (service: SharedDataService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -1,0 +1,9 @@
+<input
+  type="range"
+  [max]="max"
+  [min]="min"
+  [ngModel]="value"
+  (ngModelChange)="onValueChange($event)"
+  [style.background]="styledBackground()"
+  [step]="step"
+  />

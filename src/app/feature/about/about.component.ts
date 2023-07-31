@@ -37,8 +37,6 @@ export class AboutComponent implements OnInit  {
 
 
   constructor( )  {
-  
-
     }
 
 
@@ -50,13 +48,11 @@ export class AboutComponent implements OnInit  {
   ngOnInit(): void {
     // this.currentUser = this.userService.getCurrentUser();
     // console.log(this.userService.getCurrentUser());
-
      this.currentUser = localStorage.getItem('currentUser');
   }
 
 
 
- 
   ngAfterViewInit(){
     setTimeout(() => {
       this.focus?.nativeElement.focus()

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailValidator } from 'src/app/directive/EmailValidator.directive';
@@ -9,7 +9,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-adminManageUser',
   templateUrl: './adminManageUser.component.html',
-  styleUrls: ['./adminManageUser.component.css']
+  styleUrls: ['./adminManageUser.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminManageUserComponent implements OnInit {
 
@@ -60,10 +61,7 @@ export class AdminManageUserComponent implements OnInit {
   renderer: any;
   submitButtonRef: any;
 
-  constructor(private http: HttpClient, private dataService: DataService, private router: Router) {
-
-  
- 
+  constructor(private http: HttpClient, private dataService: DataService, private router: Router, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -253,8 +251,8 @@ export class AdminManageUserComponent implements OnInit {
         showConfirmButton: false,
         // timer: 1500
       }).then(() => {
-        window.location.href = '/admin/manage/user';
-        this.getUser()
+        // window.location.href = '/admin/manage/user';
+        // this.getUser()
       })
     } else {
       this.dataService.deleteData(this.userDetail.idDetail).subscribe({
@@ -294,6 +292,7 @@ export class AdminManageUserComponent implements OnInit {
       next: (response) => {
         console.log('lấy user successful', response);
         this.users = response
+        this.cdr.markForCheck()
       },
       error: (error) => {
         // Handle the error response here
